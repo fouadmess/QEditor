@@ -17,15 +17,16 @@ test_script:
   - npm --version
   # run tests
   - npm test
-
-# Build project
-build:
+  # Build project
   - npm run build qeditor
 
 # Cache node_modules for next builds
 cache:
   - node_modules -> package.json
   - '%APPDATA%\npm-cache'
+
+# Don't actually build.
+build: off
 
 # Deploy package
 after_deploy:
