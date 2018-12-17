@@ -35,3 +35,4 @@ deploy_script:
       }
     on:
       branch: master
+      
