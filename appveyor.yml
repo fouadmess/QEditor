@@ -9,7 +9,7 @@ install:
   # install modules
   - npm install
   # Create the .npmrc file on the AppVeyor CI server.
-  - ps: "//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII
+  - ps: "//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
 
 # Post-install test scripts.
 test_script:
