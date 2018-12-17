@@ -28,3 +28,4 @@ cache:
 
 deploy_script:
 	- ps: npm publish "dist/qeditor"
+    
