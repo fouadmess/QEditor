@@ -1,6 +1,9 @@
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: 6
+  matrix:
+    - nodejs_version: STABLE
+      configuration: publish
+    - nodejs_version: LTS
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -8,8 +11,6 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm install
-  # Create the .npmrc file on the AppVeyor CI server.
-  - ps: "//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
 
 # Post-install test scripts.
 test_script:
@@ -30,5 +31,12 @@ cache:
 build: off
 
 # Deploy package
-after_deploy:
-- ps: npm publish "dist/qeditor"
+deploy_script:
+  - ps: |
+      if ($ENV:CONFIGURATION -eq "publish")
+      {
+        "//registry.npmjs.org/:_authToken=`$`{npm_auth_token`}" | Out-File (Join-Path $ENV:APPVEYOR_BUILD_FOLDER ".npmrc") -Encoding UTF8
+        iex "npm publish "dist/qeditor"
+      }
+    on:
+      branch: master
