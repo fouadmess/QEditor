@@ -1,0 +1,9 @@
+{
+  "name": "@messaia/qeditor",
+  "version": "7.0.1-beta1",
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "quill": "^1.3.6"
+  }
+}

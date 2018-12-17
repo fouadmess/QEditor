@@ -1,0 +1,8 @@
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+@import '~quill/dist/quill.bubble.css';
+
+.ql-container .ql-editor {
+	min-height: 200px;
+	padding-bottom: 1rem;
+}
