@@ -1,0 +1,30 @@
+# Test against the latest version of this Node.js version
+environment:
+	nodejs_version: "6"
+
+# Install scripts. (runs after repo cloning)
+install:
+	# Get the latest stable version of Node.js or io.js
+	- ps: Install-Product node $env:nodejs_version
+	# install modules
+	- npm install
+	
+	"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII
+
+# Post-install test scripts.
+test_script:
+	# Output useful info for debugging.
+	- node --version
+	- npm --version
+	# run tests
+	- npm test
+
+build:
+	- npm run build qeditor
+
+cache:
+	- node_modules -> package.json
+	- '%APPDATA%\npm-cache'
+
+deploy_script:
+	- ps: npm publish "dist/qeditor"
