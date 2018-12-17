@@ -11,14 +11,6 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm install
-
-# Post-install test scripts.
-test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  # run tests
-  - npm test
   # Build project
   - npm run build qeditor
 
@@ -26,6 +18,9 @@ test_script:
 cache:
   - node_modules -> package.json
   - '%APPDATA%\npm-cache'
+
+# Don't actually test
+test: off
 
 # Don't actually build.
 build: off
